@@ -1,0 +1,741 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BDS_2020Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BDS">
+          <Key>
+            <PropertyRef Name="MaNha" />
+            <PropertyRef Name="MaCN" />
+          </Key>
+          <Property Name="MaNha" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="MaCN" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="NhaBan_Thue" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="MaNV" Type="varchar" MaxLength="8" />
+          <Property Name="MaChiNhanh" Type="varchar" MaxLength="8" />
+          <Property Name="GiaBan_GiaThue" Type="money" />
+          <Property Name="DieuKien" Type="nvarchar" MaxLength="100" />
+          <Property Name="Duong" Type="nvarchar" MaxLength="30" />
+          <Property Name="Quan" Type="nvarchar" MaxLength="30" />
+          <Property Name="TP" Type="nvarchar" MaxLength="30" />
+          <Property Name="KhuVuc" Type="nvarchar" MaxLength="30" />
+          <Property Name="MaLoai" Type="varchar" MaxLength="4" />
+          <Property Name="SoPhong" Type="int" />
+          <Property Name="NgayDang" Type="date" />
+          <Property Name="NgayHetHang" Type="date" />
+          <Property Name="TinhTrang" Type="varchar" MaxLength="20" />
+          <Property Name="LuotXem" Type="int" />
+          <Property Name="DeleteStatus" Type="bit" />
+        </EntityType>
+        <EntityType Name="ChiNhanh">
+          <Key>
+            <PropertyRef Name="MaChiNhanh" />
+          </Key>
+          <Property Name="MaChiNhanh" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="Duong" Type="nvarchar" MaxLength="30" />
+          <Property Name="Quan" Type="nvarchar" MaxLength="30" />
+          <Property Name="KhuVuc" Type="nvarchar" MaxLength="30" />
+          <Property Name="TP" Type="nvarchar" MaxLength="30" />
+          <Property Name="SDT" Type="numeric" Precision="11" Scale="0" Nullable="false" />
+          <Property Name="Fax" Type="numeric" Precision="20" Scale="0" />
+          <Property Name="DeleteStatus" Type="bit" />
+        </EntityType>
+        <EntityType Name="KhachHang">
+          <Key>
+            <PropertyRef Name="MaKH" />
+          </Key>
+          <Property Name="MaKH" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="TenKH" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="100" />
+          <Property Name="SDT" Type="numeric" Precision="11" Scale="0" />
+          <Property Name="MaChiNhanh" Type="varchar" MaxLength="8" />
+          <Property Name="MaNV" Type="varchar" MaxLength="8" />
+          <Property Name="DeleteStatus" Type="bit" />
+        </EntityType>
+        <EntityType Name="LichSuGiaoDich">
+          <Key>
+            <PropertyRef Name="MaKH" />
+            <PropertyRef Name="MaNha" />
+            <PropertyRef Name="MaCN" />
+            <PropertyRef Name="NgayGD" />
+          </Key>
+          <Property Name="MaKH" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="MaNha" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="MaCN" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="NgayGD" Type="date" Nullable="false" />
+          <Property Name="LoaiGD" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="SoThangThue" Type="int" Nullable="false" />
+          <Property Name="DeleteStatus" Type="bit" />
+        </EntityType>
+        <EntityType Name="LichSuXem">
+          <Key>
+            <PropertyRef Name="MaKH" />
+            <PropertyRef Name="MaNha" />
+          </Key>
+          <Property Name="MaKH" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="MaNha" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="MaCN" Type="varchar" MaxLength="8" />
+          <Property Name="NgayXem" Type="date" />
+          <Property Name="NhanXet" Type="nvarchar" MaxLength="100" />
+          <Property Name="DeleteStatus" Type="bit" />
+        </EntityType>
+        <EntityType Name="LoaiNha">
+          <Key>
+            <PropertyRef Name="MaLoai" />
+          </Key>
+          <Property Name="MaLoai" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="TenLoai" Type="nvarchar" MaxLength="50" />
+          <Property Name="ThongTin" Type="nvarchar" MaxLength="100" />
+          <Property Name="DeleteStatus" Type="bit" />
+        </EntityType>
+        <EntityType Name="NhanVien">
+          <Key>
+            <PropertyRef Name="MaNV" />
+          </Key>
+          <Property Name="MaNV" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="MaChiNhanh" Type="varchar" MaxLength="8" />
+          <Property Name="TenNV" Type="nvarchar" MaxLength="50" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="100" />
+          <Property Name="SDT" Type="varchar" MaxLength="11" />
+          <Property Name="GioiTinh" Type="varchar" MaxLength="3" />
+          <Property Name="NgaySinh" Type="date" />
+          <Property Name="Luong" Type="int" />
+          <Property Name="DeleteStatus" Type="bit" />
+        </EntityType>
+        <Association Name="FK_BDS_MACHINHANH">
+          <End Role="ChiNhanh" Type="Self.ChiNhanh" Multiplicity="0..1" />
+          <End Role="BDS" Type="Self.BDS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChiNhanh">
+              <PropertyRef Name="MaChiNhanh" />
+            </Principal>
+            <Dependent Role="BDS">
+              <PropertyRef Name="MaChiNhanh" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BDS_MACN">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="1" />
+          <End Role="BDS" Type="Self.BDS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="MaKH" />
+            </Principal>
+            <Dependent Role="BDS">
+              <PropertyRef Name="MaCN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BDS_MALOAI">
+          <End Role="LoaiNha" Type="Self.LoaiNha" Multiplicity="0..1" />
+          <End Role="BDS" Type="Self.BDS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiNha">
+              <PropertyRef Name="MaLoai" />
+            </Principal>
+            <Dependent Role="BDS">
+              <PropertyRef Name="MaLoai" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BDS_MANV">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="0..1" />
+          <End Role="BDS" Type="Self.BDS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="BDS">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KHACHHANG_MACHINHANH">
+          <End Role="ChiNhanh" Type="Self.ChiNhanh" Multiplicity="0..1" />
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChiNhanh">
+              <PropertyRef Name="MaChiNhanh" />
+            </Principal>
+            <Dependent Role="KhachHang">
+              <PropertyRef Name="MaChiNhanh" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KHACHHANG_MANV">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="0..1" />
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="KhachHang">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LSGIAODICH_MAKH">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="1" />
+          <End Role="LichSuGiaoDich" Type="Self.LichSuGiaoDich" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="MaKH" />
+            </Principal>
+            <Dependent Role="LichSuGiaoDich">
+              <PropertyRef Name="MaKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LSGIAODICH_MANHA">
+          <End Role="BDS" Type="Self.BDS" Multiplicity="1" />
+          <End Role="LichSuGiaoDich" Type="Self.LichSuGiaoDich" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BDS">
+              <PropertyRef Name="MaNha" />
+              <PropertyRef Name="MaCN" />
+            </Principal>
+            <Dependent Role="LichSuGiaoDich">
+              <PropertyRef Name="MaNha" />
+              <PropertyRef Name="MaCN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LSXEM_MAKH">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="1" />
+          <End Role="LichSuXem" Type="Self.LichSuXem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="MaKH" />
+            </Principal>
+            <Dependent Role="LichSuXem">
+              <PropertyRef Name="MaKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LSXEM_MANHA">
+          <End Role="BDS" Type="Self.BDS" Multiplicity="0..1" />
+          <End Role="LichSuXem" Type="Self.LichSuXem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BDS">
+              <PropertyRef Name="MaNha" />
+              <PropertyRef Name="MaCN" />
+            </Principal>
+            <Dependent Role="LichSuXem">
+              <PropertyRef Name="MaNha" />
+              <PropertyRef Name="MaCN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NHANVIEN_MACHINHANH">
+          <End Role="ChiNhanh" Type="Self.ChiNhanh" Multiplicity="0..1" />
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChiNhanh">
+              <PropertyRef Name="MaChiNhanh" />
+            </Principal>
+            <Dependent Role="NhanVien">
+              <PropertyRef Name="MaChiNhanh" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BDS_2020ModelStoreContainer">
+          <EntitySet Name="BDS" EntityType="Self.BDS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChiNhanh" EntityType="Self.ChiNhanh" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KhachHang" EntityType="Self.KhachHang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LichSuGiaoDich" EntityType="Self.LichSuGiaoDich" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LichSuXem" EntityType="Self.LichSuXem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoaiNha" EntityType="Self.LoaiNha" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NhanVien" EntityType="Self.NhanVien" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BDS_MACHINHANH" Association="Self.FK_BDS_MACHINHANH">
+            <End Role="ChiNhanh" EntitySet="ChiNhanh" />
+            <End Role="BDS" EntitySet="BDS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BDS_MACN" Association="Self.FK_BDS_MACN">
+            <End Role="KhachHang" EntitySet="KhachHang" />
+            <End Role="BDS" EntitySet="BDS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BDS_MALOAI" Association="Self.FK_BDS_MALOAI">
+            <End Role="LoaiNha" EntitySet="LoaiNha" />
+            <End Role="BDS" EntitySet="BDS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BDS_MANV" Association="Self.FK_BDS_MANV">
+            <End Role="NhanVien" EntitySet="NhanVien" />
+            <End Role="BDS" EntitySet="BDS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KHACHHANG_MACHINHANH" Association="Self.FK_KHACHHANG_MACHINHANH">
+            <End Role="ChiNhanh" EntitySet="ChiNhanh" />
+            <End Role="KhachHang" EntitySet="KhachHang" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KHACHHANG_MANV" Association="Self.FK_KHACHHANG_MANV">
+            <End Role="NhanVien" EntitySet="NhanVien" />
+            <End Role="KhachHang" EntitySet="KhachHang" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LSGIAODICH_MAKH" Association="Self.FK_LSGIAODICH_MAKH">
+            <End Role="KhachHang" EntitySet="KhachHang" />
+            <End Role="LichSuGiaoDich" EntitySet="LichSuGiaoDich" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LSGIAODICH_MANHA" Association="Self.FK_LSGIAODICH_MANHA">
+            <End Role="BDS" EntitySet="BDS" />
+            <End Role="LichSuGiaoDich" EntitySet="LichSuGiaoDich" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LSXEM_MAKH" Association="Self.FK_LSXEM_MAKH">
+            <End Role="KhachHang" EntitySet="KhachHang" />
+            <End Role="LichSuXem" EntitySet="LichSuXem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LSXEM_MANHA" Association="Self.FK_LSXEM_MANHA">
+            <End Role="BDS" EntitySet="BDS" />
+            <End Role="LichSuXem" EntitySet="LichSuXem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NHANVIEN_MACHINHANH" Association="Self.FK_NHANVIEN_MACHINHANH">
+            <End Role="ChiNhanh" EntitySet="ChiNhanh" />
+            <End Role="NhanVien" EntitySet="NhanVien" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BDS_2020Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BD">
+          <Key>
+            <PropertyRef Name="MaNha" />
+            <PropertyRef Name="MaCN" />
+          </Key>
+          <Property Name="MaNha" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MaCN" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NhaBan_Thue" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MaNV" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="MaChiNhanh" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="GiaBan_GiaThue" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DieuKien" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Duong" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Quan" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="TP" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="KhuVuc" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="MaLoai" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="SoPhong" Type="Int32" />
+          <Property Name="NgayDang" Type="DateTime" Precision="0" />
+          <Property Name="NgayHetHang" Type="DateTime" Precision="0" />
+          <Property Name="TinhTrang" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LuotXem" Type="Int32" />
+          <Property Name="DeleteStatus" Type="Boolean" />
+          <NavigationProperty Name="ChiNhanh" Relationship="Self.FK_BDS_MACHINHANH" FromRole="BDS" ToRole="ChiNhanh" />
+          <NavigationProperty Name="KhachHang" Relationship="Self.FK_BDS_MACN" FromRole="BDS" ToRole="KhachHang" />
+          <NavigationProperty Name="LoaiNha" Relationship="Self.FK_BDS_MALOAI" FromRole="BDS" ToRole="LoaiNha" />
+          <NavigationProperty Name="NhanVien" Relationship="Self.FK_BDS_MANV" FromRole="BDS" ToRole="NhanVien" />
+          <NavigationProperty Name="LichSuGiaoDiches" Relationship="Self.FK_LSGIAODICH_MANHA" FromRole="BDS" ToRole="LichSuGiaoDich" />
+          <NavigationProperty Name="LichSuXems" Relationship="Self.FK_LSXEM_MANHA" FromRole="BDS" ToRole="LichSuXem" />
+        </EntityType>
+        <EntityType Name="ChiNhanh">
+          <Key>
+            <PropertyRef Name="MaChiNhanh" />
+          </Key>
+          <Property Name="MaChiNhanh" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Duong" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Quan" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="KhuVuc" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="TP" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="SDT" Type="Decimal" Precision="11" Scale="0" Nullable="false" />
+          <Property Name="Fax" Type="Decimal" Precision="20" Scale="0" />
+          <Property Name="DeleteStatus" Type="Boolean" />
+          <NavigationProperty Name="BDS" Relationship="Self.FK_BDS_MACHINHANH" FromRole="ChiNhanh" ToRole="BDS" />
+          <NavigationProperty Name="KhachHangs" Relationship="Self.FK_KHACHHANG_MACHINHANH" FromRole="ChiNhanh" ToRole="KhachHang" />
+          <NavigationProperty Name="NhanViens" Relationship="Self.FK_NHANVIEN_MACHINHANH" FromRole="ChiNhanh" ToRole="NhanVien" />
+        </EntityType>
+        <EntityType Name="KhachHang">
+          <Key>
+            <PropertyRef Name="MaKH" />
+          </Key>
+          <Property Name="MaKH" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TenKH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DiaChi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SDT" Type="Decimal" Precision="11" Scale="0" />
+          <Property Name="MaChiNhanh" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="MaNV" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="DeleteStatus" Type="Boolean" />
+          <NavigationProperty Name="BDS" Relationship="Self.FK_BDS_MACN" FromRole="KhachHang" ToRole="BDS" />
+          <NavigationProperty Name="ChiNhanh" Relationship="Self.FK_KHACHHANG_MACHINHANH" FromRole="KhachHang" ToRole="ChiNhanh" />
+          <NavigationProperty Name="NhanVien" Relationship="Self.FK_KHACHHANG_MANV" FromRole="KhachHang" ToRole="NhanVien" />
+          <NavigationProperty Name="LichSuGiaoDiches" Relationship="Self.FK_LSGIAODICH_MAKH" FromRole="KhachHang" ToRole="LichSuGiaoDich" />
+          <NavigationProperty Name="LichSuXems" Relationship="Self.FK_LSXEM_MAKH" FromRole="KhachHang" ToRole="LichSuXem" />
+        </EntityType>
+        <EntityType Name="LichSuGiaoDich">
+          <Key>
+            <PropertyRef Name="MaKH" />
+            <PropertyRef Name="MaNha" />
+            <PropertyRef Name="MaCN" />
+            <PropertyRef Name="NgayGD" />
+          </Key>
+          <Property Name="MaKH" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MaNha" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MaCN" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NgayGD" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="LoaiGD" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SoThangThue" Type="Int32" Nullable="false" />
+          <Property Name="DeleteStatus" Type="Boolean" />
+          <NavigationProperty Name="BD" Relationship="Self.FK_LSGIAODICH_MANHA" FromRole="LichSuGiaoDich" ToRole="BDS" />
+          <NavigationProperty Name="KhachHang" Relationship="Self.FK_LSGIAODICH_MAKH" FromRole="LichSuGiaoDich" ToRole="KhachHang" />
+        </EntityType>
+        <EntityType Name="LichSuXem">
+          <Key>
+            <PropertyRef Name="MaKH" />
+            <PropertyRef Name="MaNha" />
+          </Key>
+          <Property Name="MaKH" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MaNha" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MaCN" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="NgayXem" Type="DateTime" Precision="0" />
+          <Property Name="NhanXet" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DeleteStatus" Type="Boolean" />
+          <NavigationProperty Name="BD" Relationship="Self.FK_LSXEM_MANHA" FromRole="LichSuXem" ToRole="BDS" />
+          <NavigationProperty Name="KhachHang" Relationship="Self.FK_LSXEM_MAKH" FromRole="LichSuXem" ToRole="KhachHang" />
+        </EntityType>
+        <EntityType Name="LoaiNha">
+          <Key>
+            <PropertyRef Name="MaLoai" />
+          </Key>
+          <Property Name="MaLoai" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TenLoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ThongTin" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DeleteStatus" Type="Boolean" />
+          <NavigationProperty Name="BDS" Relationship="Self.FK_BDS_MALOAI" FromRole="LoaiNha" ToRole="BDS" />
+        </EntityType>
+        <EntityType Name="NhanVien">
+          <Key>
+            <PropertyRef Name="MaNV" />
+          </Key>
+          <Property Name="MaNV" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MaChiNhanh" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="TenNV" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SDT" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="GioiTinh" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="NgaySinh" Type="DateTime" Precision="0" />
+          <Property Name="Luong" Type="Int32" />
+          <Property Name="DeleteStatus" Type="Boolean" />
+          <NavigationProperty Name="BDS" Relationship="Self.FK_BDS_MANV" FromRole="NhanVien" ToRole="BDS" />
+          <NavigationProperty Name="ChiNhanh" Relationship="Self.FK_NHANVIEN_MACHINHANH" FromRole="NhanVien" ToRole="ChiNhanh" />
+          <NavigationProperty Name="KhachHangs" Relationship="Self.FK_KHACHHANG_MANV" FromRole="NhanVien" ToRole="KhachHang" />
+        </EntityType>
+        <Association Name="FK_BDS_MACHINHANH">
+          <End Role="ChiNhanh" Type="Self.ChiNhanh" Multiplicity="0..1" />
+          <End Role="BDS" Type="Self.BD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChiNhanh">
+              <PropertyRef Name="MaChiNhanh" />
+            </Principal>
+            <Dependent Role="BDS">
+              <PropertyRef Name="MaChiNhanh" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BDS_MACN">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="1" />
+          <End Role="BDS" Type="Self.BD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="MaKH" />
+            </Principal>
+            <Dependent Role="BDS">
+              <PropertyRef Name="MaCN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BDS_MALOAI">
+          <End Role="LoaiNha" Type="Self.LoaiNha" Multiplicity="0..1" />
+          <End Role="BDS" Type="Self.BD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiNha">
+              <PropertyRef Name="MaLoai" />
+            </Principal>
+            <Dependent Role="BDS">
+              <PropertyRef Name="MaLoai" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BDS_MANV">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="0..1" />
+          <End Role="BDS" Type="Self.BD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="BDS">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LSGIAODICH_MANHA">
+          <End Role="BDS" Type="Self.BD" Multiplicity="1" />
+          <End Role="LichSuGiaoDich" Type="Self.LichSuGiaoDich" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BDS">
+              <PropertyRef Name="MaNha" />
+              <PropertyRef Name="MaCN" />
+            </Principal>
+            <Dependent Role="LichSuGiaoDich">
+              <PropertyRef Name="MaNha" />
+              <PropertyRef Name="MaCN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LSXEM_MANHA">
+          <End Role="BDS" Type="Self.BD" Multiplicity="0..1" />
+          <End Role="LichSuXem" Type="Self.LichSuXem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BDS">
+              <PropertyRef Name="MaNha" />
+              <PropertyRef Name="MaCN" />
+            </Principal>
+            <Dependent Role="LichSuXem">
+              <PropertyRef Name="MaNha" />
+              <PropertyRef Name="MaCN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KHACHHANG_MACHINHANH">
+          <End Role="ChiNhanh" Type="Self.ChiNhanh" Multiplicity="0..1" />
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChiNhanh">
+              <PropertyRef Name="MaChiNhanh" />
+            </Principal>
+            <Dependent Role="KhachHang">
+              <PropertyRef Name="MaChiNhanh" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NHANVIEN_MACHINHANH">
+          <End Role="ChiNhanh" Type="Self.ChiNhanh" Multiplicity="0..1" />
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChiNhanh">
+              <PropertyRef Name="MaChiNhanh" />
+            </Principal>
+            <Dependent Role="NhanVien">
+              <PropertyRef Name="MaChiNhanh" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KHACHHANG_MANV">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="0..1" />
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="KhachHang">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LSGIAODICH_MAKH">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="1" />
+          <End Role="LichSuGiaoDich" Type="Self.LichSuGiaoDich" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="MaKH" />
+            </Principal>
+            <Dependent Role="LichSuGiaoDich">
+              <PropertyRef Name="MaKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LSXEM_MAKH">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="1" />
+          <End Role="LichSuXem" Type="Self.LichSuXem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="MaKH" />
+            </Principal>
+            <Dependent Role="LichSuXem">
+              <PropertyRef Name="MaKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BDS_2020Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BDS" EntityType="Self.BD" />
+          <EntitySet Name="ChiNhanhs" EntityType="Self.ChiNhanh" />
+          <EntitySet Name="KhachHangs" EntityType="Self.KhachHang" />
+          <EntitySet Name="LichSuGiaoDiches" EntityType="Self.LichSuGiaoDich" />
+          <EntitySet Name="LichSuXems" EntityType="Self.LichSuXem" />
+          <EntitySet Name="LoaiNhas" EntityType="Self.LoaiNha" />
+          <EntitySet Name="NhanViens" EntityType="Self.NhanVien" />
+          <AssociationSet Name="FK_BDS_MACHINHANH" Association="Self.FK_BDS_MACHINHANH">
+            <End Role="ChiNhanh" EntitySet="ChiNhanhs" />
+            <End Role="BDS" EntitySet="BDS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BDS_MACN" Association="Self.FK_BDS_MACN">
+            <End Role="KhachHang" EntitySet="KhachHangs" />
+            <End Role="BDS" EntitySet="BDS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BDS_MALOAI" Association="Self.FK_BDS_MALOAI">
+            <End Role="LoaiNha" EntitySet="LoaiNhas" />
+            <End Role="BDS" EntitySet="BDS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BDS_MANV" Association="Self.FK_BDS_MANV">
+            <End Role="NhanVien" EntitySet="NhanViens" />
+            <End Role="BDS" EntitySet="BDS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LSGIAODICH_MANHA" Association="Self.FK_LSGIAODICH_MANHA">
+            <End Role="BDS" EntitySet="BDS" />
+            <End Role="LichSuGiaoDich" EntitySet="LichSuGiaoDiches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LSXEM_MANHA" Association="Self.FK_LSXEM_MANHA">
+            <End Role="BDS" EntitySet="BDS" />
+            <End Role="LichSuXem" EntitySet="LichSuXems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KHACHHANG_MACHINHANH" Association="Self.FK_KHACHHANG_MACHINHANH">
+            <End Role="ChiNhanh" EntitySet="ChiNhanhs" />
+            <End Role="KhachHang" EntitySet="KhachHangs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NHANVIEN_MACHINHANH" Association="Self.FK_NHANVIEN_MACHINHANH">
+            <End Role="ChiNhanh" EntitySet="ChiNhanhs" />
+            <End Role="NhanVien" EntitySet="NhanViens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KHACHHANG_MANV" Association="Self.FK_KHACHHANG_MANV">
+            <End Role="NhanVien" EntitySet="NhanViens" />
+            <End Role="KhachHang" EntitySet="KhachHangs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LSGIAODICH_MAKH" Association="Self.FK_LSGIAODICH_MAKH">
+            <End Role="KhachHang" EntitySet="KhachHangs" />
+            <End Role="LichSuGiaoDich" EntitySet="LichSuGiaoDiches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LSXEM_MAKH" Association="Self.FK_LSXEM_MAKH">
+            <End Role="KhachHang" EntitySet="KhachHangs" />
+            <End Role="LichSuXem" EntitySet="LichSuXems" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BDS_2020ModelStoreContainer" CdmEntityContainer="BDS_2020Entities">
+          <EntitySetMapping Name="BDS">
+            <EntityTypeMapping TypeName="BDS_2020Model.BD">
+              <MappingFragment StoreEntitySet="BDS">
+                <ScalarProperty Name="MaNha" ColumnName="MaNha" />
+                <ScalarProperty Name="MaCN" ColumnName="MaCN" />
+                <ScalarProperty Name="NhaBan_Thue" ColumnName="NhaBan_Thue" />
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="MaChiNhanh" ColumnName="MaChiNhanh" />
+                <ScalarProperty Name="GiaBan_GiaThue" ColumnName="GiaBan_GiaThue" />
+                <ScalarProperty Name="DieuKien" ColumnName="DieuKien" />
+                <ScalarProperty Name="Duong" ColumnName="Duong" />
+                <ScalarProperty Name="Quan" ColumnName="Quan" />
+                <ScalarProperty Name="TP" ColumnName="TP" />
+                <ScalarProperty Name="KhuVuc" ColumnName="KhuVuc" />
+                <ScalarProperty Name="MaLoai" ColumnName="MaLoai" />
+                <ScalarProperty Name="SoPhong" ColumnName="SoPhong" />
+                <ScalarProperty Name="NgayDang" ColumnName="NgayDang" />
+                <ScalarProperty Name="NgayHetHang" ColumnName="NgayHetHang" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+                <ScalarProperty Name="LuotXem" ColumnName="LuotXem" />
+                <ScalarProperty Name="DeleteStatus" ColumnName="DeleteStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChiNhanhs">
+            <EntityTypeMapping TypeName="BDS_2020Model.ChiNhanh">
+              <MappingFragment StoreEntitySet="ChiNhanh">
+                <ScalarProperty Name="MaChiNhanh" ColumnName="MaChiNhanh" />
+                <ScalarProperty Name="Duong" ColumnName="Duong" />
+                <ScalarProperty Name="Quan" ColumnName="Quan" />
+                <ScalarProperty Name="KhuVuc" ColumnName="KhuVuc" />
+                <ScalarProperty Name="TP" ColumnName="TP" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="DeleteStatus" ColumnName="DeleteStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KhachHangs">
+            <EntityTypeMapping TypeName="BDS_2020Model.KhachHang">
+              <MappingFragment StoreEntitySet="KhachHang">
+                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+                <ScalarProperty Name="TenKH" ColumnName="TenKH" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="MaChiNhanh" ColumnName="MaChiNhanh" />
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="DeleteStatus" ColumnName="DeleteStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LichSuGiaoDiches">
+            <EntityTypeMapping TypeName="BDS_2020Model.LichSuGiaoDich">
+              <MappingFragment StoreEntitySet="LichSuGiaoDich">
+                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+                <ScalarProperty Name="MaNha" ColumnName="MaNha" />
+                <ScalarProperty Name="MaCN" ColumnName="MaCN" />
+                <ScalarProperty Name="NgayGD" ColumnName="NgayGD" />
+                <ScalarProperty Name="LoaiGD" ColumnName="LoaiGD" />
+                <ScalarProperty Name="SoThangThue" ColumnName="SoThangThue" />
+                <ScalarProperty Name="DeleteStatus" ColumnName="DeleteStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LichSuXems">
+            <EntityTypeMapping TypeName="BDS_2020Model.LichSuXem">
+              <MappingFragment StoreEntitySet="LichSuXem">
+                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+                <ScalarProperty Name="MaNha" ColumnName="MaNha" />
+                <ScalarProperty Name="MaCN" ColumnName="MaCN" />
+                <ScalarProperty Name="NgayXem" ColumnName="NgayXem" />
+                <ScalarProperty Name="NhanXet" ColumnName="NhanXet" />
+                <ScalarProperty Name="DeleteStatus" ColumnName="DeleteStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoaiNhas">
+            <EntityTypeMapping TypeName="BDS_2020Model.LoaiNha">
+              <MappingFragment StoreEntitySet="LoaiNha">
+                <ScalarProperty Name="MaLoai" ColumnName="MaLoai" />
+                <ScalarProperty Name="TenLoai" ColumnName="TenLoai" />
+                <ScalarProperty Name="ThongTin" ColumnName="ThongTin" />
+                <ScalarProperty Name="DeleteStatus" ColumnName="DeleteStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NhanViens">
+            <EntityTypeMapping TypeName="BDS_2020Model.NhanVien">
+              <MappingFragment StoreEntitySet="NhanVien">
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="MaChiNhanh" ColumnName="MaChiNhanh" />
+                <ScalarProperty Name="TenNV" ColumnName="TenNV" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="Luong" ColumnName="Luong" />
+                <ScalarProperty Name="DeleteStatus" ColumnName="DeleteStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

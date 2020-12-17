@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="489051c7e0894d0b8f8e3b1e553dfcb6" Name="Diagram1">
+        <EntityTypeShape EntityType="BDS_2020Model.BD" Width="1.5" PointX="5.25" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDS_2020Model.ChiNhanh" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDS_2020Model.KhachHang" Width="1.5" PointX="8.25" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDS_2020Model.LichSuGiaoDich" Width="1.5" PointX="10.5" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDS_2020Model.LichSuXem" Width="1.5" PointX="13.5" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDS_2020Model.LoaiNha" Width="1.5" PointX="3" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDS_2020Model.NhanVien" Width="1.5" PointX="3" PointY="17.375" IsExpanded="true" />
+        <AssociationConnector Association="BDS_2020Model.FK_BDS_MACHINHANH" ManuallyRouted="false" />
+        <AssociationConnector Association="BDS_2020Model.FK_BDS_MACN" ManuallyRouted="false" />
+        <AssociationConnector Association="BDS_2020Model.FK_BDS_MALOAI" ManuallyRouted="false" />
+        <AssociationConnector Association="BDS_2020Model.FK_BDS_MANV" ManuallyRouted="false" />
+        <AssociationConnector Association="BDS_2020Model.FK_LSGIAODICH_MANHA" ManuallyRouted="false" />
+        <AssociationConnector Association="BDS_2020Model.FK_LSXEM_MANHA" ManuallyRouted="false" />
+        <AssociationConnector Association="BDS_2020Model.FK_KHACHHANG_MACHINHANH" ManuallyRouted="false" />
+        <AssociationConnector Association="BDS_2020Model.FK_NHANVIEN_MACHINHANH" ManuallyRouted="false" />
+        <AssociationConnector Association="BDS_2020Model.FK_KHACHHANG_MANV" ManuallyRouted="false" />
+        <AssociationConnector Association="BDS_2020Model.FK_LSGIAODICH_MAKH" ManuallyRouted="false" />
+        <AssociationConnector Association="BDS_2020Model.FK_LSXEM_MAKH" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
