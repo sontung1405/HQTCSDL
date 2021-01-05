@@ -1,0 +1,162 @@
+﻿<UserControl x:Class="BDS_2020.CustomerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:BDS_2020"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <local:DateConverter x:Key="dateConverter"></local:DateConverter>
+    </UserControl.Resources>
+    <Grid Background="White">
+        <TabControl TabStripPlacement="Left">
+            <TabItem FontWeight="UltraBold" Header="Thông tin cá nhân">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <TextBlock Text="KHÁCH HÀNG" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                    </Grid>
+                    <DataGrid IsReadOnly="True" x:Name="userDataGrid" Grid.Row="1">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding MaKH}" Header="ID"/>
+                            <DataGridTextColumn Binding="{Binding TenKH}" Header="Họ tên"/>
+                            <DataGridTextColumn Binding="{Binding DiaChi}" Header="Địa chỉ"/>
+                            <DataGridTextColumn Binding="{Binding SDT}" Header="SDT"/>
+                            <DataGridTextColumn Binding="{Binding MaChiNhanh}" Header="Chi nhánh"/>
+                            <DataGridTextColumn Binding="{Binding MaNV}" Header="Nhân viên hỗ trợ"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+
+            <TabItem FontWeight="UltraBold" Header="Nhà cho thuê">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <TextBlock Text="KHÁCH HÀNG" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                    </Grid>
+                    <DataGrid IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False" Grid.Row="1" ItemsSource="{Binding RentHouseList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding MaNha}" Header="Mã nhà"/>
+                            <DataGridTextColumn Binding="{Binding MaCN}" Header="Mã chủ nhà"/>
+                            <DataGridTextColumn Binding="{Binding MaChiNhanh}" Header="Mã chi nhánh"/>
+                            <DataGridTextColumn Binding="{Binding GiaBan_GiaThue}" Header="Tiền thuê/tháng"/>
+                            <DataGridTextColumn Binding="{Binding Duong}" Header="Đường"/>
+                            <DataGridTextColumn Binding="{Binding Quan}" Header="Quận"/>
+                            <DataGridTextColumn Binding="{Binding TP}" Header="TP"/>
+                            <DataGridTextColumn Binding="{Binding KhuVuc}" Header="Khu vực"/>
+                            <DataGridTextColumn Binding="{Binding MaLoai}" Header="Mã loại"/>
+                            <DataGridTextColumn Binding="{Binding SoPhong}" Header="Số phòng"/>
+                            <DataGridTextColumn Binding="{Binding NgayDang, Converter={StaticResource dateConverter}}" Header="Ngày đăng"/>
+                            <DataGridTextColumn Binding="{Binding NgayHetHang, Converter={StaticResource dateConverter}}" Header="Ngày hết hạn"/>
+                            <DataGridTextColumn Binding="{Binding TinhTrang}" Header="Tình trạng"/>
+                            <DataGridTextColumn Binding="{Binding LuotXem}" Header="Lượt xem"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Grid.Row="1" Command="{Binding DeleteTripCommand}" Padding="0" Margin="8"  Width="22" Height="22" VerticalAlignment="Top" HorizontalAlignment="Right" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                        <materialDesign:PackIcon Kind="DeleteAlert" />
+                    </Button>
+                </Grid>
+            </TabItem>
+
+            <TabItem FontWeight="UltraBold" Header="Nhà bán">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <TextBlock Text="KHÁCH HÀNG" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                    </Grid>
+                    <DataGrid IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False" Grid.Row="1" ItemsSource="{Binding SellHouseList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding MaNha}" Header="Mã nhà"/>
+                            <DataGridTextColumn Binding="{Binding MaCN}" Header="Mã chủ nhà"/>
+                            <DataGridTextColumn Binding="{Binding MaChiNhanh}" Header="Mã chi nhánh"/>
+                            <DataGridTextColumn Binding="{Binding GiaBan_GiaThue}" Header="Giá"/>
+                            <DataGridTextColumn Binding="{Binding DieuKien}" Header="Điều kiện"/>
+                            <DataGridTextColumn Binding="{Binding Duong}" Header="Đường"/>
+                            <DataGridTextColumn Binding="{Binding Quan}" Header="Quận"/>
+                            <DataGridTextColumn Binding="{Binding TP}" Header="TP"/>
+                            <DataGridTextColumn Binding="{Binding KhuVuc}" Header="Khu vực"/>
+                            <DataGridTextColumn Binding="{Binding MaLoai}" Header="Mã loại"/>
+                            <DataGridTextColumn Binding="{Binding SoPhong}" Header="Số phòng"/>
+                            <DataGridTextColumn Binding="{Binding NgayDang, Converter={StaticResource dateConverter}}" Header="Ngày đăng"/>
+                            <DataGridTextColumn Binding="{Binding NgayHetHang, Converter={StaticResource dateConverter}}" Header="Ngày hết hạn"/>
+                            <DataGridTextColumn Binding="{Binding TinhTrang}" Header="Tình trạng"/>
+                            <DataGridTextColumn Binding="{Binding LuotXem}" Header="Lượt xem"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Grid.Row="1" Command="{Binding DeleteTripCommand}" Padding="0" Margin="8"  Width="22" Height="22" VerticalAlignment="Top" HorizontalAlignment="Right" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                        <materialDesign:PackIcon Kind="DeleteAlert" />
+                    </Button>
+                </Grid>
+            </TabItem>
+            
+            <TabItem FontWeight="UltraBold" Header="Lịch sử mua nhà">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <TextBlock Text="KHÁCH HÀNG" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                    </Grid>
+                    <DataGrid AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" ItemsSource="{Binding BuyHistoryList}" Grid.Row="1">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding MaNha}" Header="Mã nhà"/>
+                            <DataGridTextColumn Binding="{Binding MaCN}" Header="Mã chủ nhà"/>
+                            <DataGridTextColumn Binding="{Binding NgayGD, Converter={StaticResource dateConverter}}" Header="Ngày giao dịch"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem FontWeight="UltraBold" Header="Lịch sử thuê nhà">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <TextBlock Text="KHÁCH HÀNG" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                    </Grid>
+                    <DataGrid AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" ItemsSource="{Binding RentHistoryList}" Grid.Row="1">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding MaNha}" Header="Mã nhà"/>
+                            <DataGridTextColumn Binding="{Binding MaCN}" Header="Mã chủ nhà"/>
+                            <DataGridTextColumn Binding="{Binding SoThangThue}" Header="Số tháng thuê"/>
+                            <DataGridTextColumn Binding="{Binding NgayGD, Converter={StaticResource dateConverter}}" Header="Ngày giao dịch"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem FontWeight="UltraBold" Header="Lịch sử xem nhà">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <TextBlock Text="KHÁCH HÀNG" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                    </Grid>
+                    <DataGrid AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" ItemsSource="{Binding ViewHistoryList}" Grid.Row="1">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding MaNha}" Header="Mã nhà"/>
+                            <DataGridTextColumn Binding="{Binding MaCN}" Header="Mã chủ nhà"/>
+                            <DataGridTextColumn Binding="{Binding NgayXem, Converter={StaticResource dateConverter}}" Header="Ngày xem"/>
+                            <DataGridTextColumn Binding="{Binding NhanXet}" Header="Nhận xét"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>
